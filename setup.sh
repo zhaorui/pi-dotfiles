@@ -3,22 +3,6 @@
 mkdir -p ~/Code
 mkdir -p ~/Scripts
 
-if [ ! -e /etc/apt/sources.list.bak ]; then
-    sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
-    # Output redirection (e.g.,>) is performed by bash not by cat
-    # so run bash with root's UID use sudo
-    sudo bash -c 'cat > /etc/apt/sources.list' << EOF
-# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
-deb https://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-free
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-free
-deb https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-updates main contrib non-free
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-updates main contrib non-free
-deb https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free
-deb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free
-EOF
-fi
 
 sudo apt update
 sudo apt upgrade
