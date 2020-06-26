@@ -30,3 +30,8 @@ reset_dns() {
     sudo systemctl restart systemd-resolved
 }
 
+setup_git() {
+    git config --global user.email "zhaoruiexplorer@icloud.com"
+    git config --global user.name "zhaorui"
+}
+

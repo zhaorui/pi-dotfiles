@@ -10,6 +10,8 @@ mkdir -p ~/Scripts
 sudo apt update
 sudo apt upgrade
 
+setup_git
+
 # setup vim
 sudo apt install vim
 rm -rf ~/.vim_runtime
