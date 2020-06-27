@@ -7,6 +7,30 @@ groups | egrep -qw "root|admin|sudo" || eval 'printf "Need privileges to run\n";
 mkdir -p ~/Code
 mkdir -p ~/Scripts
 
+if [ ! -e /etc/apt/sources.list.bak ]; then
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+    # Output redirection (e.g.,>) is performed by bash not by cat
+    # so run bash with root's UID use sudo
+    sudo bash -c 'cat > /etc/apt/sources.list' << EOF
+
+deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ buster main contrib non-free
+# Uncomment line below then 'apt-get update' to enable 'apt-get source'
+#deb-src http://archive.raspbian.org/raspbian/ stretch main contrib non-free rpi
+
+EOF
+fi
+
+if [ ! -e /etc/apt/sources.list.d/raspi.list.bak ]; then
+    sudo cp /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak
+    sudo bash -c 'cat > /etc/apt/sources.list.d/raspi.list' << EOF
+
+deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui
+# Uncomment line below then 'apt-get update' to enable 'apt-get source'
+#deb-src http://archive.raspberrypi.org/debian/ stretch main ui
+
+EOF
+fi
+
 sudo apt update
 sudo apt upgrade
 
