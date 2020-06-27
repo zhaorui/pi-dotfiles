@@ -36,10 +36,8 @@ setup_git() {
 }
 
 setup_smb() {
-    echo -n "share path [~/Public]: "
-    read SHARED_PATH
-    eval "SHARED_PATH=${SHARED_PATH}"
-    SHARED_PATH=${SHARED_PATH:-~/Public}
+
+    SHARED_PATH=$1
     SHARED_NAME=$(basename ${SHARED_PATH})
 
     mkdir -p ${SHARED_PATH}
@@ -54,5 +52,6 @@ setup_smb() {
 
 EOF
     sudo systemctl restart smbd
+    sudo smbpasswd -a $(whoami)
+    sudo pdbedit -L
 }
-
