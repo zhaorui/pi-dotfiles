@@ -35,3 +35,24 @@ setup_git() {
     git config --global user.name "zhaorui"
 }
 
+setup_smb() {
+    echo -n "share path [~/Public]: "
+    read SHARED_PATH
+    eval "SHARED_PATH=${SHARED_PATH}"
+    SHARED_PATH=${SHARED_PATH:-~/Public}
+    SHARED_NAME=$(basename ${SHARED_PATH})
+
+    mkdir -p ${SHARED_PATH}
+    sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
+    sudo bash -c 'cat >> /etc/samba/smb.conf' << EOF
+
+[${SHARED_NAME}]
+    comment = Samba Shared Folder
+    path = ${SHARED_PATH}
+    read only = no
+    browsable = yes
+
+EOF
+    sudo systemctl restart smbd
+}
+

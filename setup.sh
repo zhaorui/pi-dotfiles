@@ -28,3 +28,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 ./add_zsh_plugin.py zsh-autosuggestions
 reset_dns
 
+# setup samba
+echo -n "do you want to setup samba? [Y/N]"
+read YN
+if [ $YN = 'y' ] || [ $YN = 'Y' ];then
+    setup_smb
+fi
