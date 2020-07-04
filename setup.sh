@@ -41,6 +41,7 @@ setup_git
 echo -n "do you want to setup samba? [Y/N]"
 read YN
 if [ $YN = 'y' ] || [ $YN = 'Y' ];then
+    sudo apt-get install samba
     echo -n "share path [~/Public]: "
     read SHARED_PATH
     eval "SHARED_PATH=${SHARED_PATH}"
